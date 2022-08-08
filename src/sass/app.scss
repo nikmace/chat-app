@@ -67,7 +67,7 @@ body {
 		&__conversation-board {
 			padding: 1em 0 2em;
 			height: calc(100vh - 55px - 2em - 25px * 2 - .5em - 3em);
-			overflow: scroll;
+			overflow-x: auto;
 	
 			&__message-container.reversed {
 				flex-direction: row-reverse;
