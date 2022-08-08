@@ -1,17 +1,22 @@
 import React from 'react';
 
-const PersonMsgReversed: React.FC<{message: string, userId: string}> = ({ message, userId }) => {
+const PersonMsgReversed: React.FC<{
+  message: string;
+  userId: string;
+  username: string;
+  sex: string;
+}> = ({ message, userId, username, sex }) => {
   return (
     <div className="chat__conversation-board__message-container reversed">
       <div className="chat__conversation-board__message__person">
         <div className="chat__conversation-board__message__person__avatar">
           <img
-            src="https://randomuser.me/api/portraits/men/9.jpg"
+            src="https://cdn1.vectorstock.com/i/thumb-large/84/50/profile-icon-female-head-in-chat-bubble-isolated-vector-23798450.jpg"
             alt="Dennis Mikle"
           />
         </div>
         <span className="chat__conversation-board__message__person__nickname">
-          {userId.slice(0, 8)}
+          {username}
         </span>
       </div>
       <div className="chat__conversation-board__message__context">

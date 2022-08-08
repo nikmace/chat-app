@@ -46,7 +46,10 @@ const PersonMsg = () => {
             <line x1="15" y1="9" x2="15.01" y2="9" />
           </svg>
         </button>
-        <button type="button" className="btn-icon chat__conversation-board__message__option-button option-item more-button">
+        <button
+          type="button"
+          className="btn-icon chat__conversation-board__message__option-button option-item more-button"
+        >
           <svg
             className="feather feather-more-horizontal sc-dnqmqq jxshSx"
             xmlns="http://www.w3.org/2000/svg"

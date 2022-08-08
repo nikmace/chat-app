@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
+import { Toaster } from 'react-hot-toast';
 
 import ConversationPanel from 'components/ConversationPanel';
 import PersonMsgReversed from 'components/PersonMsgReversed';
+import { User } from 'utils/getUser';
 
-const socket = io('https://chat-appsrv.herokuapp.com/');
+const socket = io('https://chat-appsrv.herokuapp.com/'); // https://chat-appsrv.herokuapp.com/
 
 export interface Message {
   message: string;
@@ -13,6 +15,8 @@ export interface Message {
 export interface SocketMessage {
   id: string;
   message: string;
+  username: string;
+  sex: string;
   sessionId: string;
 }
 
@@ -22,7 +26,6 @@ export const App: React.FC = () => {
   useEffect(() => {
     const handleMessage = (msg: SocketMessage) => {
       setMessage((prev) => [...prev, msg]);
-      console.log(msg);
     };
 
     socket.on('connection', () => {
@@ -42,18 +45,39 @@ export const App: React.FC = () => {
     };
   }, []);
 
-  const sendMsg = (msg: string) => {
+  const sendMsg = (msg: string, u: User) => {
     socket.emit('chat message', {
       type: 'message',
-      value: msg,
+      value: {
+        message: msg,
+        ...u,
+      },
     });
   };
 
   return (
     <div className="--dark-theme chat" id="chat">
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          className: '',
+          duration: 4000,
+          success: {
+            style: {
+              padding: '8px',
+            },
+          },
+        }}
+      />
       <div className="chat__conversation-board">
         {message.map((msg: SocketMessage) => (
-          <PersonMsgReversed key={msg.id} message={msg.message} userId={msg.sessionId} />
+          <PersonMsgReversed
+            key={msg.id}
+            message={msg.message}
+            userId={msg.sessionId}
+            username={msg.username}
+            sex={msg.sex}
+          />
         ))}
       </div>
       <ConversationPanel sendMsg={sendMsg} />

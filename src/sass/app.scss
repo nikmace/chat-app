@@ -3,7 +3,7 @@
 @import './libs/normalize';
 
 .--dark-theme {
-    --chat-background: rgba(10, 14, 14, 0.95);
+    --chat-background: rgb(10 14 14 / 95%);
 	--chat-panel-background: #131719;
 	--chat-bubble-background: #14181a;
 	--chat-bubble-active-background: #171a1b;
@@ -53,6 +53,7 @@ body {
 	.btn-icon {
 		position: relative;
 		cursor: pointer;
+
 		svg {
 			stroke: #FFF;
 			fill: #FFF;
@@ -63,24 +64,21 @@ body {
     }
 
 	.chat {
-
 		&__conversation-board {
-
 			padding: 1em 0 2em;
 			height: calc(100vh - 55px - 2em - 25px * 2 - .5em - 3em);
-			overflow: auto;
+			overflow: scroll;
 	
 			&__message-container.reversed {
-
 				flex-direction: row-reverse;
 				
 				.chat__conversation-board__message__bubble  {
 					position: relative;
-	
 					color: var(--chat-text-color);
+
 					span {
 						&:not(:last-child) {
-							margin: 0 0 2em 0;
+							margin: 0 0 2em;
                         }
                     }
                 }
@@ -100,7 +98,6 @@ body {
 	
 	
 			&__message-container {
-
 				position: relative;
 				display: flex;
 				flex-direction: row;
@@ -117,7 +114,7 @@ body {
                 }
 	
 				&:not(:last-child) {
-					margin: 0 0 2em 0;
+					margin: 0 0 2em;
                 }
             }
 		
@@ -129,7 +126,6 @@ body {
 				margin: 0 1.2em 0 0;
 	
 				&__avatar {
-
 					height: 35px;
 					width: 35px;
 					overflow: hidden;
@@ -164,7 +160,6 @@ body {
             }
 	
 			&__message__options {
-
 				align-self: center;
 				position: absolute;
 				right: 0;
@@ -201,7 +196,6 @@ body {
 			&__message__date
 		
 			&__message__bubble {
-
                 span {
                     width: fit-content;
                     display: inline-table;
@@ -212,7 +206,7 @@ body {
                     padding: .5em .8em;
                     line-height: 1.5;
                     border-radius: 6px;
-                    font-family: 'Lato', sans-serif;
+                    font-family: Lato, sans-serif;
                 }
                     
                 &:not(:last-child) {
@@ -226,7 +220,6 @@ body {
         }
 				
 		&__conversation-panel {
-
 			background: var(--chat-panel-background);
 			border-radius: 12px;
 			padding: 0 1em;
@@ -260,6 +253,7 @@ body {
 				width: 23px;
 				background: var(--chat-add-button-background);
 				border-radius: 50%;
+
 				svg {
 					width: 70%;
 					stroke: #54575c;
@@ -307,7 +301,7 @@ body {
 				font-size: 13px;
 				background: transparent;
 				border: 0;
-				font-family: 'Lato', sans-serif;
+				font-family: Lato, sans-serif;
 				resize: none;
             }
         }
@@ -319,9 +313,11 @@ body {
 	#chat {
 		margin: 0;
 		border-radius: 0;
+
 		.chat__conversation-board {
 			height: calc(100vh - 55px - 2em - .5em - 3em)
         }
+
 		.chat__conversation-board__message__options {
 			display: none !important
         }

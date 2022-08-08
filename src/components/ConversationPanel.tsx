@@ -1,15 +1,40 @@
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
+import { User } from 'utils/getUser';
 
 interface PanelProps {
-  sendMsg: (msg: string) => void;
+  sendMsg: (msg: string, u: User) => void;
 }
 
 const ConversationPanel: React.FC<PanelProps> = ({ sendMsg }) => {
   const [message, setMessage] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
+
+  const handleKeypress = (event: any) => {
+    // It triggers by pressing the enter key
+    const { key } = event;
+    if (key === 'Enter') {
+      handleSubmit();
+    }
+  };
 
   const handleSubmit = () => {
-    sendMsg(message);
-    setMessage('');
+    // TODO: Wrap this with Redux logic
+    // let u = getUser();
+    // if (!u) {
+    //   if (username.length > 2) {
+    //     u = setUser({ username, sex: 'male' });
+    //   } else {
+    //     toast.error('Username cannot be empty or less than 2 characters');
+    //   }
+    // }
+
+    if (message.length > 0 && username.length > 2) {
+      sendMsg(message, { username, sex: 'male' });
+      setMessage('');
+    } else {
+      toast.error('Message cannot be empty');
+    }
   };
 
   return (
@@ -64,11 +89,18 @@ const ConversationPanel: React.FC<PanelProps> = ({ sendMsg }) => {
           placeholder="Type a message..."
           onChange={(e) => setMessage(e.target.value)}
           value={message}
+          onKeyPress={handleKeypress}
+        />
+        <input
+          className="chat__conversation-panel__input panel-item"
+          placeholder="Your username..."
+          onChange={(e) => setUsername(e.target.value)}
+          value={username}
         />
         <button
-          onClick={handleSubmit}
           type="button"
           className="chat__conversation-panel__button panel-item btn-icon send-message-button"
+          onClick={handleSubmit}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
